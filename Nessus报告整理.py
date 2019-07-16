@@ -81,10 +81,10 @@ def runs(i):
         if i[3] != 'None':
             host.append(i[4])
             port.append(i[6])
-            name.append(i[7])
+            name.append(trans(i[7]))
             riskmean(i[3])
-            description.append(i[9])
-            solution.append(i[10])
+            description.append(trans(i[9]))
+            solution.append(trans(i[10]))
             cve.append(i[1])
 
             n += 1

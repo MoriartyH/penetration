@@ -1,6 +1,6 @@
 import csv,openpyxl,time,threading,requests,json
 import execjs       #用来执行js脚本
-from openpyxl.styles import PatternFill
+from openpyxl.styles import PatternFill,Alignment,Font
 
 
 n = 0  # 漏洞计数器
@@ -142,7 +142,9 @@ def ex():                  #创建Excel表，并写入数据
     wb = openpyxl.load_workbook('Nessus漏洞表.xlsx')
     sheet = wb.active
     for i in range(1, len(columns) + 1):  # 写入表头
-        _ = sheet.cell(row=1, column=i, value=str(columns[i - 1]))
+        sheet.cell(row=1, column=i, value=str(columns[i - 1])).fill = PatternFill("solid", fgColor="CC99FF")
+        sheet.cell(row=1, column=i, value=str(columns[i - 1])).alignment = Alignment(horizontal='center', vertical='center')
+        sheet.cell(row=1, column=i, value=str(columns[i - 1])).font = Font(bold=True)
 
     for j in range(2,9):
         if j == 2: data = host
@@ -184,8 +186,8 @@ def runs(i):
             port.append(i[6])
             name.append(trans(i[7]))
             riskmean(i[3])
-            description.append(trans(i[9]))
-            solution.append(trans(i[10]))
+            description.append(trans(i[9].replace("\n"," ")))
+            solution.append(trans(i[10].replace("\n"," ")))
             cve.append(i[1])
             n += 1
 

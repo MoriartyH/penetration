@@ -186,7 +186,13 @@ def runs(i):
             port.append(i[6])
             name.append(trans(i[7]))
             riskmean(i[3])
-            description.append(trans(i[9].replace("\n"," ")))
+
+            des = trans(i[9].replace("\n"," "))
+            if des == "" :
+                description.append(i[9])
+            else:
+                description.append(des)
+
             solution.append(trans(i[10].replace("\n"," ")))
             cve.append(i[1])
             n += 1
@@ -200,6 +206,6 @@ if __name__ == '__main__':
         for i in reader:
             t1 = threading.Thread(target=runs, args=(i,))
             t1.start()
-            #time.sleep(0.1)
+            time.sleep(0.2)
             t1.join()
     ex()
